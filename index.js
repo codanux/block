@@ -1,7 +1,7 @@
 var Web3 = require('web3');
 var web3 = new Web3(Web3.givenProvider || 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
 
-let blockSync = function (blockNumber) {
+let blockReceipts = function (blockNumber) {
     return new Promise(async (resolve, reject) => {
         await web3.eth.getBlock(blockNumber, true)
             .then(async block => {
@@ -26,7 +26,7 @@ let blockSync = function (blockNumber) {
 }
 
 
-blockSync(10008622).then((block) => {
+blockReceipts(10008622).then((block) => {
     console.log(block)
 }).catch(error => {
     console.log('error', error.message)
