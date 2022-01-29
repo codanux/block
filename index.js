@@ -1,7 +1,7 @@
 var Web3 = require('web3');
 var web3 = new Web3(Web3.givenProvider || 'https://rinkeby.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161');
 
-let blockReceipts = function (blockNumber) {
+let blockReceipts = function (blockNumber, topics = []) {
     return new Promise(async (resolve, reject) => {
         await web3.eth.getBlock(blockNumber, true)
             .then(async block => {
@@ -9,7 +9,7 @@ let blockReceipts = function (blockNumber) {
                 let logs = await web3.eth.getPastLogs({
                     fromBlock: blockNumber,
                     toBlock: blockNumber,
-                    topics: []
+                    topics
                 }).catch(reject);
 
 
